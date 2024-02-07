@@ -1,0 +1,20 @@
+#!/usr/bin/env ksh93
+#
+# generate zwr from text file
+
+gen_vepzwr() {
+	typeset INFILE=${1}
+  typeset PAC=${2}
+	typeset GLOB=${3}
+	typeset OUT_FIL="${4}"
+
+  log "Extract from $1 -> ${OUT_FIL}"
+
+  echo "Output File: GT.M MUPIP EXTRACT" > ${OUT_FIL}
+  echo "23-JAN-2019  10:21:10 ZWR" >> ${OUT_FIL}
+
+  cat ${INFILE}|\
+  awk -v GLOB="$GLOB" -v PAC=$PAC 'BEGIN { FS="|" } {printf "%s(\"%s\",\"%s\",%s,%s,\"%s\",\"%s\")=\"%s|%s|%s|%s\"\n",GLOB,PAC,$1,$2,$3,$4,$5,$6,$7,$8,$9;}' >> ${OUT_FIL}
+
+}
+

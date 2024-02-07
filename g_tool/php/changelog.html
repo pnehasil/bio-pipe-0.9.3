@@ -1,0 +1,123 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>RUN</title>
+    <style type="text/css" media="screen">
+    </style>
+  </head>
+  <body>
+    <br>
+    <br>
+    <b> Zmeny v HasiBoude </b>
+    <br>
+    <br>
+      <ul>
+
+      <li> 04.04.2023 <br>
+      - nova clinvar db clinvar_20230326.vcf.gz pouzita od runu 007_80 a 001_197 <br><br>
+
+      <li> 03.04.2023 <br>
+      - kontrola CNV_final.txt jestli obsahuje vsechny pacienty <br><br>
+
+      <li> 21.03.2023 <br>
+      - pri generovani index.php se zobrazuje *op (nejak vypadlo) <br>
+      - pridan krok ILLUMINA/210_raw_files.sh pro generovani raw vystupu z gemini <br><br>
+
+      <li> 08.03.2023 <br>
+      - oprava tabulky konfirmace Sanger <br><br>
+
+      <li> 07.03.2023 <br>
+      - oprava mazani dvojitych mutaci perl/sed <br><br>
+
+      <li> 28.02.2023 <br>
+      - oprava nazvu pacienta v igv.php <br><br>
+
+      <li> 03.02.2023 <br>
+      - upravena hlavicka, SBDS a FANCM do skupiny 3 <br>
+      - MET tr. varianta NM_001127500 zmenena na NM_000245  <br>
+      - pridana moznost mazani v tabulce konfirmace MLPA <br>
+      - zmena v ADDVKS.m a ADDVKP.m, nove globaly ^PTSCARR a ^SCTRLS <br>
+      - rozsireni poli codon_change varchar(510),invar_sig varchar(160) <br>
+      - pridane zpracovani vysledku PINDELu <br>
+      - zmena v zobrazovani APC promotoru - upravi se (jen pro zobrazeni) APC.php <br>
+      - pro zobrazeni pri vsech filtrech vytvorena separatni tabulka s nahledem <br>
+      - u dvojitych mutaci nektere nezobrazujeme viz DW_BLACK.txt <br><br>
+
+      <li> 31.05.2022 <br>
+      - zmena filtrace bcftools filter -e INFO/DP&lt;5 a zaroven  -e FORMAT/DP&lt;5 v <br>
+      &nbsp; ILLUMINA/141_create_vcf_jed_par.sh<br><br>
+
+      <li> 25.04.2022 <br>
+      - zmena filtrace FS&lt;30 na FS&lt;45 v ILLUMINA/110_vcf2gemini.sh, ILLUMINA/141_create_vcf_jed_par.sh<br><br>
+
+      <li> 23.04.2022 <br>
+      - ILLUMINA/110_vcf2gemini.sh, ILLUMINA/141_create_vcf_jed_par.sh<br>
+      &nbsp; uprava Snpeff odebran parametr -noShiftHgvs<br><br>
+
+      <li> 26.03.2022 <br>
+      - ILLUMINA/130_ale_2_par.sh paralelni indexovani<br><br>
+
+      <li> 22.03.2022 <br>
+      - prehozeni c.p. u tabulky konfirmace Sanger<br><br>
+
+      <li> 01.02.2022 <br>
+      - novy link do clinvaru dle rs<br><br>
+
+      <li> 18.01.2022 <br>
+      - oprava vypoctu vzdalenosti od kraje exonu<br>
+      - uprava filtrace vcf<br><br>
+
+      <li> 13.01.2022 <br>
+      - oprava kodovani url pro dotazy do clivaru<br><br>
+
+      <li> 10.01.2022 <br>
+      - nova clinvar database ver. 20211225<br><br>
+
+      <li> 23.11.2021 <br>
+      - zmena filtrace dle imact_so, pri zaskrtnutem se zobrazi i <br>
+        &nbsp; disruptive_inframe_insertion<br>
+
+      <li> 11.11.2021 <br>
+      - zmena filtrace dle imact_so, pri zaskrtnutem se zobrazi i <br>
+        &nbsp; disruptive_inframe_deletion<br>
+        &nbsp; disruptive_inframe_duplication viz Popiska filtrace <br>
+      - do hasiboudy se dostane temer vse, do primarniho filtru jsou pridane podminkmy: <br>
+        &nbsp; exon>0, biotype=protein_coding a aa_change obsahuje p. (OR) <br><br>
+
+      <li> 23.6.2021 <br>
+      - pridane mazani v tabulce konfirmace sanger<br>
+      - pridano: 6-risk_allele, 7-drug_response, 8-seq_error do sekce "vlozeni nove varianty"<br> 
+      - pridan link na upravu varianty, aby se nemuselo chodit pres "Do zpravy"<br>
+      - zmeny: vnova.php, vtab.php, index.php, delsanger.php<br>
+      - pridane sloupce z vep databaze [sift,polyphen][score,pred]<br><br>
+
+      <li> 14.6.2021 <br>
+      - u pacientky pridana tabulka dvojitych mutaci<br>
+      - v tabulce pokryti novy sloupec Cnt<br><br>
+
+      <li> 4.6.2021 <br>
+      - nova clinvar DB, na hlavni strance zmena Konfirmace variant -> Kontrola variant<br>
+      - novy soubor GATK_VCF/jednotlive/gemini/dohromady.GATK_regions_WT.txt s pridanymi ALT a WT<br>
+      - cnv se pocitaji na pocitaci pod stolem ve virtualu alela1<br><br>
+
+      <li> 2.6.2021 <br>
+      - ve sloupci NV pridano: 6-risk_allele, 7-drug_response, 8-seq_error<br>
+      &nbsp; ukaz.php, vnova.php, updiag.php <br><br>
+
+      <li> 26.5.2021 <br>
+      - novy sloupec vzd. v tabulce Konfirmace Sanger<br>
+      - novy sloupec %VAF v tabulkach variant<br><br>
+
+      <li> 13.5.2021 <br>
+      - predelany vypocet WT/ALT, melo by se najit u kazde varianty <br>
+      - zmena filtrovani vcf, filtr QD>2 zmenen na QD>1  <br>
+      &nbsp; zaroven se zmenil skript 060_gen_tab.sh, kde ve WT/ALT zmeni ./. na -1/-1<br>
+      &nbsp; Pro zvidave: https://gatk.broadinstitute.org/hc/en-us/articles/360056968272-QualByDepth <br>
+
+     </ul>
+
+
+</body>
+</html>

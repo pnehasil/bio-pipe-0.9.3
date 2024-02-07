@@ -1,0 +1,43 @@
+#!/usr/bin/env ksh93
+#
+
+
+get_kor() {
+   typeset zxfil=${1}.zal
+   typeset zxpac=${2}
+   typeset zxtmpv=${3}
+
+zxtmp="/tmp/xpom_$$"
+
+rm -rf $zxtmpv
+
+# zaporna cisla a TH -0.6
+grep "-" $zxfil | sed 's/ /|/g' | cut -d"|" -f2,4 > $zxtmp
+for zxlin in `cat $zxtmp`
+  do
+    hod=`echo $zxlin | cut -d "|" -f1`
+    hod=`echo $hod | awk '{printf "%f", $1 * -10}' | cut -d"." -f1`
+    if [ $hod -ge 6 ]
+     then
+      zxkor=`echo $zxlin | cut -d "|" -f2`
+      echo "$zxpac|$zxkor" >> $zxtmpv
+    fi
+  done
+rm $zxtmp
+
+# kladna cisla a TH 0.5
+grep -v "-" $zxfil | sed 's/ /|/g' | cut -d"|" -f2,4 > $zxtmp
+for zxlin in `cat $zxtmp`
+  do
+    hod=`echo $zxlin | cut -d "|" -f1`
+    hod=`echo $hod | awk '{printf "%f", $1 * 10}' | cut -d"." -f1`
+    if [ $hod -ge 5 ]
+     then
+      zxkor=`echo $zxlin | cut -d "|" -f2`
+      echo "$zxpac|$zxkor" >> $zxtmpv
+    fi
+  done
+rm $zxtmp
+
+}
+

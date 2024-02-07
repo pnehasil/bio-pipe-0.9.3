@@ -1,0 +1,96 @@
+# This file is generated from /mnt/raid/Workspace/Wor96N/g_tool/phase/ILLUMINA/010_create_dirs_env.sh
+# ------ All changes will be lost. ------
+# 
+# Tue Feb  6 03:07:30 PM CET 2024
+# 
+export RG_DIR=/mnt/raid/Workspace/Wor96N/run_96N/RG 
+export SAM_DIR=/mnt/raid/Workspace/Wor96N/run_96N/sam 
+export MAPS_DIR=/mnt/raid/Workspace/Wor96N/run_96N/mapstat 
+export SORT_DIR=/mnt/raid/Workspace/Wor96N/run_96N/sorted_bam 
+export RMDUP_DIR=/mnt/raid/Workspace/Wor96N/run_96N/rmdup_bam 
+export REALIGNED_DIR=/mnt/raid/Workspace/Wor96N/run_96N/realigned 
+export RECALIBRATED_DIR=/mnt/raid/Workspace/Wor96N/run_96N/recalibrated 
+export GATK_VCF_DIR=/mnt/raid/Workspace/Wor96N/run_96N/GATK_VCF 
+export GATK_VCF_JED=/mnt/raid/Workspace/Wor96N/run_96N/GATK_VCF/jednotlive 
+export GATK_VCF_JED_GEM=/mnt/raid/Workspace/Wor96N/run_96N/GATK_VCF/jednotlive/gemini 
+export GATK_VCF_JED_ANO= 
+export VCF_DIR=/mnt/raid/Workspace/Wor96N/run_96N/vcf 
+export VCF_TABIX_DIR=/mnt/raid/Workspace/Wor96N/run_96N/vcf/tabix_vcf 
+export FPIC_DIR=/mnt/raid/Workspace/Wor96N/run_96N/picard 
+export FPIN_DIR=/mnt/raid/Workspace/Wor96N/run_96N/pindel 
+export NPIN_DIR=/mnt/raid/Workspace/Wor96N/run_96N/pindel/novy 
+export GVCF_DIR=/mnt/raid/Workspace/Wor96N/run_96N/GVCF 
+export CNV_KIT_DIR=/mnt/raid/Workspace/Wor96N/run_96N/cnvkit 
+export GATK3_VCF_DIR=/mnt/raid/Workspace/Wor96N/run_96N/GATK3 
+export GATK4_VCF_DIR=/mnt/raid/Workspace/Wor96N/run_96N/GATK4 
+export GVCF3_DIR=/mnt/raid/Workspace/Wor96N/run_96N/GVCF3 
+export GVCF4_DIR=/mnt/raid/Workspace/Wor96N/run_96N/GVCF4 
+# 
+export NOVOALIGN_DIR=/mnt/raid/Workspace/Wor96N/Linky/novoalign 
+export PICARD_DIR=/mnt/raid/Workspace/Wor96N/Linky/picard 
+export REF_DIR=/mnt/raid/Workspace/Wor96N/Linky/reference 
+export SAMTOOLS_DIR=/mnt/raid/Workspace/Wor96N/Linky/samtools 
+export BCFTOOLS_DIR=/mnt/raid/Workspace/Wor96N/Linky/bcftools 
+export BCFTOOLS_13_DIR=/mnt/raid/Workspace/Wor96N/Linky/bcftools_1.3 
+export BEDTOOLS_DIR=/mnt/raid/Workspace/Wor96N/Linky/bedtools 
+export GATK_DIR=/mnt/raid/Workspace/Wor96N/Linky/gatk_dir 
+export GATK4_DIR=/mnt/raid/Workspace/Wor96N/Linky/gatk4_dir 
+export REF_GATK_DIR=/mnt/raid/Workspace/Wor96N/Linky/ref_gatk_dir 
+export DATABASE_GATK_DIR=/mnt/raid/Workspace/Wor96N/Linky/database_gatk_dir 
+export BED_DIR=/mnt/raid/Workspace/Wor96N/Linky/bed_dir 
+export SNPEFF_DIR=/mnt/raid/Workspace/Wor96N/Linky/snpeff_dir 
+export CNV_KIT=/mnt/raid/Workspace/Wor96N/Linky/cnvkit 
+export PINDEL_DIR=/mnt/raid/Workspace/Wor96N/Linky/pindel 
+export VT_DIR=/mnt/raid/Workspace/Wor96N/Linky/vt_dir 
+export TABIX_DIR=/mnt/raid/Workspace/Wor96N/Linky/tabix_dir 
+export GEMINI_DIR=/mnt/raid/Workspace/Wor96N/Linky/gemini_dir 
+export GEMINI_DATA=/mnt/raid/Workspace/Wor96N/Linky/gemini_data 
+export VEP_DIR=/mnt/raid/Workspace/Wor96N/Linky/vep_dir 
+export VEP_CACHE=/mnt/raid/Workspace/Wor96N/Linky/vep_cache 
+export BIN_DIR=/mnt/raid/Workspace/Wor96N/Linky/bin_dir 
+export JAVA8_BIN=/mnt/raid/Workspace/Wor96N/Linky/java8_bin 
+#
+# Config file for ubeo-3019-uxser ip:10.2.46.149
+#
+export G_TMP_DIR=/mnt/raid/TMP # global tmp directory for java programs
+export GTM_DIR=/GTM            # database dir
+export FAST2SAM_PROC=42        # 020_fast2sam_par.sh 
+export FAST2SAM_THR=16         #
+export SAM2BAM_PROC=45         # 030_sam2bam_par.sh
+export SAM2BAM_RAM=16G          #
+export RMDUP_PROC=45           # 040_remove_duplicates_par.sh
+export RMDUP_RAM=16G           # 
+export ADD_RD_PROC=45          # 050_add_read_group_par.sh
+export ADD_RD_RAM=16G          # 
+export BAM_IDX_PROC=96         # 060_indexing_par.sh
+export REALIG1_PROC=40         # 070_realigment_par.sh
+export REALIG1_RAM=16G         #
+export REALIG2_PROC=40         # 071_realigment_par.sh
+export REALIG2_RAM=16G         #
+export RECAL0_PROC=40          # 080_base_quality_recalib_par.sh
+export RECAL0_RAM=16G          # 
+export RECAL1_PROC=40          # 081_base_quality_recalib_par.sh
+export RECAL1_RAM=16G          # 
+export RECAL2_PROC=40          # 082_base_quality_recalib_par.sh
+export RECAL2_RAM=16G          # 
+export HS_METRICS_PROC=96      # 090_hs_metrics_seqcap_V3_par.sh
+export HS_METRICS_RAM=6G       # 
+export GVCF_PROC=40            # 100_gvcf_par.sh
+export GVCF_RAM=16G            # 
+#########################################
+export VCF2GEM_RAM=108G        # 110_vcf2gemini.sh
+export VCF2GEM_LOAD=16         #
+export GEM2TXT_PROC=30         # 115_gemini2txt.sh
+export NPIN_PROC=6             # 135_npindel.sh
+export NPIN_RAM=100G           #
+export CR_VCF0_PROC=64         # 140_create_vcf_jed_par.sh
+export CR_VCF0_RAM=12G         # 
+export CR_VCF1_PROC=24          # 141_create_vcf_jed_par.sh
+export CR_VCF1_RAM=24G         # 
+export GEM_LOAD_PROC=16        # 150_gemini_load_par.sh
+export GEM_CLNREV_PROC=24      # 155_add_clnrev.sh 
+export GEM2TXT_PAR_PROC=16     # 160_gemini2txt_par.sh
+export ADD_ALT_WT_PROC=30      # 170_add_wt_alt.sh
+export PREP_DOUBLE_PROC=30     # 180_prepare_double.sh
+export GEM2WEB_PAR_PROC=16     # 200_gemini2web.sh
+# --- end of file ---

@@ -1,0 +1,69 @@
+#!/usr/bin/env ksh93
+check_value() {
+ #check mandatory values
+	if [ "x" = "x${1}" ]; then
+		echo
+		echo "=== ERROR ==="
+		echo "  <${2}> parameter required"
+		echo
+		print_usage
+		exit 1
+	fi
+}
+
+print_usage() {
+	echo "Usage: $(basename ${0}) -p <phase> -s <source> -t <target> -r <run> -f <reference> -z <server> [-h] [-l] [-b <start>] [-e <finish>] "
+	echo
+}
+
+load_params() {
+
+
+# -- defaults --
+typeset -i first_step=0
+typeset -i last_step=999
+
+while getopts "z:f:d:r:p:s:t:b:e:l:h" optchar; do
+	#echo "${optchar}"
+	#echo "${OPTARG}"
+	case ${optchar} in
+	h)	print_usage && exit 1 ;;
+	\?)	print_usage && exit 1 ;;
+	p)	phase=${OPTARG}
+		;;
+	s)	SRC=${OPTARG}
+		;;
+	t)	TGT=${OPTARG}
+		;;
+	r)	RUN=${OPTARG}
+		;;
+	b)	first_step=${OPTARG}
+		;;
+	e)	last_step=${OPTARG}
+		;;
+	f)	REF=${OPTARG}
+		;;
+	d)	DBS=${OPTARG}
+		;;
+	z)	SER=${OPTARG}
+		;;
+	l)	if [ "${phase}" != "" ];
+		 then
+		  echo "List of steps in phase ${phase}: "
+		  for i in ${WOR_PHASES}/${phase}/[0-9][0-9][0-9]*; do echo "  $(basename $i)"; done
+		  echo
+		  exit
+		fi
+		echo "No phase selected"
+		exit
+		;;
+	esac
+done
+
+check_value "${SRC}" source_dir
+check_value "${TGT}" target_dir
+check_value "${phase}" phase
+check_value "${SER}" ser
+
+}
+

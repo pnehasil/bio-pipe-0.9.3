@@ -1,0 +1,33 @@
+#!/usr/bin/env ksh93
+#
+# mupip load
+# $1 - target directory (environment)
+# $2 - zwr file with full path
+# $3 - mupip params
+
+mupip_load() {
+	typeset ENV=${1}
+	typeset FILE=${2}
+	typeset PARAMS="${3}"
+
+	. ${ENV}/biowenv > /dev/null 2>&1
+	log "Mupip load ${ENV} ${PARAMS} ${FILE}"
+
+	[ -r ${FILE} ] || error_exit "File ${FILE} not readable"
+
+	CMD="$gtm_dist/mupip load ${PARAMS} ${FILE} 2>&1"
+	#set res=0
+	#echo ${CMD}
+	#res=$(ksh -c "${CMD}")
+	#res="$($gtm_dist/mupip load ${PARAMS} ${FILE} 2>&1)"
+	$gtm_dist/mupip load ${PARAMS} ${FILE} >> ${FLOG} 2>&1
+	stat=$?
+
+	[ ${stat} -ne 0 ] && error_exit "MUPIP LOAD FAILED: status ${stat}, output ${res}"
+
+	GBL=`basename ${FILE}`
+	#log  "${GBL}: $(printf '%s' ${res} | grep TOTAL)"
+	log  "${GBL}: Loaded"
+
+}
+

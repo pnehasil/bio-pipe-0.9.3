@@ -1,0 +1,59 @@
+# This file is generated from /mnt/raid/Workspace/Wor96N/g_tool/phase/WEB/010_create_dirs_env.sh
+# ------ All changes will be lost. ------
+# 
+# Tue Feb  6 06:47:41 PM CET 2024
+# 
+export SRC_FIL=/mnt/raid/Workspace/Wor96N/run_96N/cnvkit/CNV_final.txt 
+export OUT_DIR=/mnt/raid/Workspace/Wor96N/run_96N/WWW 
+export TMP_DIR=/mnt/raid/Workspace/Wor96N/run_96N/WWW/tmp 
+export GR1_DIR=/mnt/raid/Workspace/Wor96N/run_96N/WWW/tmp/GR1 
+export GR2_DIR=/mnt/raid/Workspace/Wor96N/run_96N/WWW/tmp/GR2 
+export GR3_DIR=/mnt/raid/Workspace/Wor96N/run_96N/WWW/tmp/GR3 
+export PRELEZLE=/mnt/raid/Workspace/Wor96N/run_96N/WWW/tmp/prelezle.txt 
+export MUMPS_DIR=/mnt/raid/Workspace/Wor96N/run_96N/WWW/tmp/MUMPS 
+export WEB_DIR=/mnt/sdc/www/runy 
+export WEB_IPA=10.2.46.147 
+#
+# Config file for ubeo-3019-uxser ip:10.2.46.149
+#
+export G_TMP_DIR=/mnt/md0/TMP  # global tmp directory for java programs
+export GTM_DIR=/GTM            # database dir
+export FAST2SAM_PROC=16        # 020_fast2sam_par.sh 
+export FAST2SAM_THR=16         #
+export SAM2BAM_PROC=12         # 030_sam2bam_par.sh
+export SAM2BAM_RAM=9G          #
+export RMDUP_PROC=14           # 040_remove_duplicates_par.sh
+export RMDUP_RAM=12G           # 
+export ADD_RD_PROC=16          # 050_add_read_group_par.sh
+export ADD_RD_RAM=12G          # 
+export BAM_IDX_PROC=30         # 060_indexing_par.sh
+export REALIG1_PROC=16         # 070_realigment_par.sh
+export REALIG1_RAM=12G         #
+export REALIG2_PROC=16         # 071_realigment_par.sh
+export REALIG2_RAM=12G         #
+export RECAL0_PROC=12          # 080_base_quality_recalib_par.sh
+export RECAL0_RAM=10G          # 
+export RECAL1_PROC=10          # 081_base_quality_recalib_par.sh
+export RECAL1_RAM=12G          # 
+export RECAL2_PROC=12          # 082_base_quality_recalib_par.sh
+export RECAL2_RAM=10G          # 
+export HS_METRICS_PROC=24      # 090_hs_metrics_seqcap_V3_par.sh
+export HS_METRICS_RAM=5G       # 
+export GVCF_PROC=8             # 100_gvcf_par.sh
+export GVCF_RAM=24G            # 
+export VCF2GEM_RAM=108G        # 110_vcf2gemini.sh
+export VCF2GEM_LOAD=16         #
+export GEM2TXT_PROC=30         # 115_gemini2txt.sh
+export NPIN_PROC=16            # 135_npindel.sh
+export NPIN_RAM=7G             #
+export CR_VCF0_PROC=10         # 140_create_vcf_jed_par.sh
+export CR_VCF0_RAM=12G         # 
+export CR_VCF1_PROC=10         # 141_create_vcf_jed_par.sh
+export CR_VCF1_RAM=10G         # 
+export GEM_LOAD_PROC=16        # 150_gemini_load_par.sh
+export GEM_CLNREV_PROC=24      # 155_add_clnrev.sh 
+export GEM2TXT_PAR_PROC=16     # 160_gemini2txt_par.sh
+export ADD_ALT_WT_PROC=30      # 170_add_wt_alt.sh
+export PREP_DOUBLE_PROC=30     # 180_prepare_double.sh
+export GEM2WEB_PAR_PROC=16     # 200_gemini2web.sh
+# --- end of file ---

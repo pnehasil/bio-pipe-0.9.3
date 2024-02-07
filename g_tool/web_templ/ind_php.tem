@@ -1,0 +1,159 @@
+<?php
+
+include "./soft/kkk.php";
+include "./soft/dat.php";
+
+
+// tabulka Konfirmace MLPA
+
+echo "<table border=0> <tr>";
+echo "<td align=\"center\"><h3>Konfirmace MLPA</h3></td><td> </td>";
+echo "<td align=\"center\"><h3>Konfirmace Sanger</h3></td></tr>";
+echo "<tr><td valign=\"top\">";
+
+$mysqli2 = new mysqli($server_name,$user,$pass,$database);
+if ($mysqli2->connect_errno) {
+    echo "Failed to connect to MySQL: (" . $mysqli2->connect_errno . ") " . $mysqli2->connect_error;
+}
+
+$mysqli2->real_query("SELECT * FROM nezapomen" );
+$res2 = $mysqli2->use_result();
+
+
+echo "<table border=2>";
+echo "<tr bgcolor=e0e0e0>";
+echo "<td> Pacient </td><td> gene </td><td> chrom </td><td> start </td><td> Exon </td><td> Smazat? </td></tr>";
+
+$soubor = fopen("../../tmp/mlpa.csv", "w");
+
+while ($row2 = $res2->fetch_assoc()) {
+
+   $pac = $row2['pac'] ;
+   $gen = $row2['gen'] ;
+   $chr = $row2['chr'] ;
+   $start = $row2['start'] ;
+   $exom = $row2['exom'] ;
+
+   echo "<tr><td><b> $pac </b></td><td> $gen </td><td> $chr </td><td> $start </td><td> $exom </td>";
+   echo "<td align=center><a href=\"./soft/delmlpa.php?pac=$pac&gen=$gen\"> X </a></td></tr>";
+   fwrite($soubor, "$pac|$gen|$chr|$start\r\n");
+
+}
+echo "</table>";
+fclose($soubor);
+
+echo "</td><td width=150> </td><td valign=\"top\">";
+
+
+// tabulka Konfirmace Sanger
+echo "<table border=2>";
+echo "<tr bgcolor=e0e0e0>";
+echo "<td> Pacient </td><td> gene </td><td> codon_change </td><td> aa_change </td><td> transcript </td><td> chrom </td><td> start </td><td> exon </td><td>  </td><td> Smazat? </td></tr>";
+
+
+$mysqli3 = new mysqli($server_name,$user,$pass,$database);
+if ($mysqli3->connect_errno) {
+    echo "Failed to connect to MySQL: (" . $mysqli3->connect_errno . ") " . $mysqli3->connect_error;
+}
+
+$res3=$mysqli3->query("SELECT * FROM konfirmace;");
+$cnt3 = $res3->num_rows;
+
+
+//echo "<br>CNT3>>$cnt3<<<br>";
+
+//if($cnt3 > 0) {
+
+$soubor = fopen("../../tmp/sanger.csv", "w");
+$zsoubor = fopen("../../tmp/zsanger_XXRUNXX.csv", "w");
+
+   while ($row3 = $res3->fetch_assoc()) {
+
+     $zpac=$row3['pac'];
+     $zpid=$row3['p_id'];
+
+//echo "PAC>$zpac<br>";
+//echo "ID>$zpid<br><br>";
+
+     $mysqli4 = new mysqli($server_name,$user,$pass,$database);
+     if ($mysqli4->connect_errno) {
+         echo "Failed to connect to MySQL: (" . $mysqli4->connect_errno . ") " . $mysqli4->connect_error;
+     }
+
+     $res4=$mysqli4->query("SELECT * FROM $zpac WHERE id=$zpid;");
+     $row4=$res4->fetch_assoc();
+
+     $xgene = $row4['gene'] ;
+     $xcodon_change = $row4['codon_change'] ;
+     $xaa_change = $row4['aa_change'] ;
+     $xtranscript = $row4['transcript'] ;
+     $xchrom = $row4['chrom'] ;
+     $xstart = $row4['start'] ;
+     $xend = $row4['end'] ;
+     $xref = $row4['ref'] ;
+     $xalt = $row4['alt'] ;
+     $xexon = $row4['exon'] ;
+     $xzwt = $row4['zwt'] ;
+     $xzalt = $row4['zalt'] ;
+     $xrs_ids = $row4['rs_ids'] ;
+     $ximpact_so = $row4['impact_so'] 
+
+
+     // upravime poradi u aa_change
+     $p=""; $c="";
+     $pos = strpos($xaa_change,'c.');
+     if($pos > 0) {
+       $p = substr($xaa_change, $pos);
+       $c = substr($xaa_change,0, $pos-1);
+       $xaa_change=$p . "/" . $c;
+     }
+     if($p === "") { $p = $xaa_change;}
+
+     $cu = str_replace("p.","p.(",$c) . ")" ;
+
+     // totez u exonu
+    $pos = strpos($xexon,'/');
+    if($pos > 0) {
+       $nx = substr($xexon,0,$pos);
+     }
+
+     echo "<tr><td><b> $zpac </b></td><td> $xgene </td><td> $xcodon_change </td><td> $xaa_change </td> ";
+     echo "<td> $xtranscript </td><td> $xchrom </td><td> $xstart </td><td> $xexon </td>";
+     echo "<td> $xgene:$xtranscript:exon$nx:$p:$c </td>";
+     echo "<td align=center><a href=\"./soft/delsanger.php?pac=$zpac&pid=$zpid\"> X </a></td>";
+     echo "</tr>";
+
+     fwrite($soubor, "$zpac|$xgene|$xcodon_change|$xaa_change|$xtranscript|$xchrom|$xstart|$xexon|$xgene:$xtranscript:exon$nx:$p:$c\r\n");
+     fwrite($zsoubor, "$zpac|$xgene|$p|$cu|$ximpact_so|$vaf|$xrs_ids\r\n");
+     mysqli_close($mysqli4);
+
+   }
+
+   mysqli_close($mysqli3);
+   fclose($soubor);
+   fclose($zsoubor);
+   echo "</table>";
+
+//}
+
+
+//$soubor = fopen("../tmp/sanger.csv", "w");
+
+//fwrite($soubor, "$gene|$aa_change|$impact_so|$chr|$start|$end|$ref|$alt|$cnt3\r\n");
+
+//fclose($soubor);
+
+
+echo "</td></tr>";
+
+echo "<tr><td> <a href=\"../../tmp/mlpa.csv\">Tabulka v cvs</a> </td>";
+echo "<td> </td> <td> <a href=\"../../tmp/sanger.csv\">Tabulka v cvs</a> </td>";
+echo "</tr>";
+
+echo "<tr><td> </td>";
+echo "<td> </td> <td> <a href=\"../../tmp/zsanger_XXRUNXX.csv\">Tabulka do zpravy</a> </td>";
+echo "</tr></table>";
+
+
+
+?>

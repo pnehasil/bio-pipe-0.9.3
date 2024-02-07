@@ -1,0 +1,159 @@
+--
+-- Database: `nase_ref`
+--
+
+USE nase_ref;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `autorizace`
+--
+
+CREATE TABLE `autorizace` (
+  `id` varchar(50) NOT NULL,
+  `date` int(12) NOT NULL,
+  `nick` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ch_dia`
+--
+
+CREATE TABLE `ch_dia` (
+  `id` int(11) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ip` varchar(20) COLLATE utf8_czech_ci NOT NULL,
+  `item` varchar(40) COLLATE utf8_czech_ci NOT NULL,
+  `user` varchar(40) COLLATE utf8_czech_ci NOT NULL,
+  `change` varchar(4000) COLLATE utf8_czech_ci NOT NULL,
+  `chrom` varchar(10) COLLATE utf8_czech_ci NOT NULL,
+  `start` int(11) NOT NULL,
+  `end` int(11) NOT NULL,
+  `alt` varchar(200) COLLATE utf8_czech_ci NOT NULL,
+  `ref` varchar(200) COLLATE utf8_czech_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clinvar`
+--
+
+CREATE TABLE `clinvar` (
+  `gene` varchar(20) DEFAULT NULL,
+  `chrom` varchar(10) DEFAULT NULL,
+  `start` int(11) DEFAULT NULL,
+  `ref` varchar(200) DEFAULT NULL,
+  `alt` varchar(200) DEFAULT NULL,
+  `clinvar_sig` varchar(150) DEFAULT NULL,
+  `clinvar_revstat` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nase_var`
+--
+
+CREATE TABLE `nase_var` (
+  `chrom` varchar(10) DEFAULT NULL,
+  `start` int(11) DEFAULT NULL,
+  `end` int(11) DEFAULT NULL,
+  `alt` varchar(200) DEFAULT NULL,
+  `ref` varchar(200) DEFAULT NULL,
+  `poz1` varchar(512) DEFAULT NULL,
+  `poz2` varchar(512) DEFAULT NULL,
+  `dia` varchar(8192) DEFAULT NULL,
+  `class` int(3) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pac_var`
+--
+
+CREATE TABLE `pac_var` (
+  `pac` varchar(30) DEFAULT NULL,
+  `run` int(5) DEFAULT NULL,
+  `chrom` varchar(10) DEFAULT NULL,
+  `start` int(11) DEFAULT NULL,
+  `end` int(11) DEFAULT NULL,
+  `alt` varchar(200) DEFAULT NULL,
+  `ref` varchar(200) DEFAULT NULL,
+  `clas_czecanca` varchar(10) DEFAULT NULL,
+  `clas_ubeo` varchar(10) DEFAULT NULL,
+  `clinvar_sig` varchar(60) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `uzivatele`
+--
+
+CREATE TABLE `uzivatele` (
+  `nick` varchar(20) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `pass` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+--
+-- Dumping data for table `uzivatele`
+--
+
+INSERT INTO `uzivatele` (`nick`, `name`, `pass`) VALUES
+('petra', 'Petra Kleiblová', 'bb4e1313cdd8219fc70b0faab9115eb3'),
+('marketa', 'Markéta Janatová', 'bb4e1313cdd8219fc70b0faab9115eb3'),
+('janicka', 'Jana Soukupová', 'bb4e1313cdd8219fc70b0faab9115eb3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `var_cze03`
+--
+
+CREATE TABLE `var_cze03` (
+  `id` int(11) NOT NULL,
+  `gene` varchar(20) DEFAULT NULL,
+  `transcript` varchar(20) DEFAULT NULL,
+  `cds_change` varchar(200) DEFAULT NULL,
+  `aa_change` varchar(510) DEFAULT NULL,
+  `codon_change` varchar(200) DEFAULT NULL,
+  `aa_length` int(5) DEFAULT NULL,
+  `impact` varchar(50) DEFAULT NULL,
+  `impact_severity` varchar(10) DEFAULT NULL,
+  `chrom` varchar(10) DEFAULT NULL,
+  `start` int(11) DEFAULT NULL,
+  `end` int(11) DEFAULT NULL,
+  `ref` varchar(200) DEFAULT NULL,
+  `alt` varchar(200) DEFAULT NULL,
+  `male` int(5) DEFAULT NULL,
+  `female` int(5) DEFAULT NULL,
+  `01_UBEO_Class` varchar(20) DEFAULT NULL,
+  `Czecanca_konsorcium` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Indexes for table `ch_dia`
+--
+ALTER TABLE `ch_dia`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `id_2` (`id`),
+  ADD KEY `id_3` (`id`);
+
+--
+-- Indexes for table `var_cze03`
+--
+ALTER TABLE `var_cze03`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+
+

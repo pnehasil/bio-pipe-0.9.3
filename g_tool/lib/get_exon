@@ -1,0 +1,105 @@
+#!/usr/bin/env ksh93
+#
+
+
+get_exon() {
+	typeset gen=${1}
+   typeset xk1=${2}
+   typeset tmp=${3}
+
+   chr=`echo $xk1 | cut -d"_" -f1 | sed 's/ //g'`
+	sta=`echo $xk1 | cut -d"_" -f2 | sed 's/ //g'`
+	end=`echo $xk1 | cut -d"_" -f3 | sed 's/ //g'`
+
+   #exref="${BED_DIR}/exony_koor_2u.txt"
+   exref="${BED_DIR}/final_APC_CZE_1.2_anot.txt"
+   xex="666"
+
+#echo "grep $gen $exref" >> /tmp/test1.txt
+#echo "chr>>$chr<< sta>>$sta<< end>>$en<<d" >> /tmp/test1.txt
+
+   grep $gen $exref > $tmp
+
+   for line in `cat $tmp | sed 's/\t/|/g'`
+     do
+       echr=`echo $line | cut -d"|" -f1`
+       esta=`echo $line | cut -d"|" -f2`
+       eend=`echo $line | cut -d"|" -f3`
+
+# mame nekolik pripadu, kdy exon 'sedi' a to:
+#
+#              esta-------------------eend
+# 1)    |-------------|
+# 2)                    |-------------------------|
+# 3)                      |---------|
+# 4)      |---------------------------------------------|
+
+
+# 1)
+     nasel=0
+     if [ "$chr" == "$echr" ]
+      then
+       if [ $sta -le $esta ] 
+        then
+          if [ $end -le $eend ]
+           then
+            if [ $end -gt $esta ]
+             then
+               xex=`echo $line | cut -d"|" -f6`
+               nasel=1
+             fi
+          fi
+       fi
+     fi
+# 2)
+     if [ $nasel -eq 0 ]
+      then
+        if [ "$chr" == "$echr" ]
+         then
+          if [ $sta -ge $esta ] 
+           then
+             if [ $end -gt $eend ]
+              then
+               if [ $sta -lt $eend ] 
+                then
+                  xex=`echo $line | cut -d"|" -f6`
+                  nasel=1
+               fi
+             fi
+          fi
+        fi
+      fi
+# 3)
+     if [ $nasel -eq 0 ]
+      then
+        if [ "$chr" == "$echr" ]
+         then
+          if [ $sta -ge $esta ] 
+           then
+             if [ $end -le $eend ]
+              then
+                xex=`echo $line | cut -d"|" -f6`
+                nasel=1
+             fi
+          fi
+        fi
+      fi
+# 4)
+     if [ $nasel -eq 0 ]
+      then
+        if [ "$chr" == "$echr" ]
+         then
+          if [ $sta -lt $esta ] 
+           then
+             if [ $end -gt $eend ]
+              then
+                xex=`echo $line | cut -d"|" -f6`
+             fi
+          fi
+        fi
+      fi
+
+     done
+   echo $xex
+}
+

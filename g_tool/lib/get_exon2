@@ -1,0 +1,46 @@
+#!/usr/bin/env ksh93
+#
+
+
+get_exon2() {
+	typeset chr=${1}
+   typeset sta=${2}
+   typeset tmp=${3}
+
+   #exref="${BED_DIR}/exony_koor_2u.txt"
+   exref="${BED_DIR}/final_APC_CZE_1.2_anot.txt"
+   xex="666|666|-"
+
+#echo "grep $gen $exref" >> /tmp/test1.txt
+#echo "chr>>$chr<< sta>>$sta<< end>>$en<<d" >> /tmp/test1.txt
+
+   grep $chr $exref > $tmp
+
+   for line in `cat $tmp | sed 's/\t/|/g'`
+     do
+       #echr=`echo $line | cut -d"|" -f1`
+       esta=`echo $line | cut -d"|" -f2`
+       eend=`echo $line | cut -d"|" -f3`
+
+# mame nekolik pripadu, kdy exon 'sedi' a to:
+#
+#              esta-------------------eend
+# 2)                    |
+
+
+# 2)
+          if [ "$sta" -ge "$esta" ] 
+           then
+               if [ "$sta" -lt "$eend" ] 
+                then
+                  xex=`echo $line | cut -d"|" -f6`
+                  cnt=`echo $line | cut -d"|" -f7`
+                  gen=`echo $line | cut -d"|" -f5`
+                  nasel=1
+               fi
+             fi
+     done
+
+   echo "$xex|$cnt|$gen"
+}
+

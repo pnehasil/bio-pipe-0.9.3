@@ -1,0 +1,47 @@
+    <a href="./soft/changelog.html"> Zmeny v Hasiboude </a>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a href="./extra_g.html">Extra geny</a> 
+    <br>
+    <br>
+    <a href="./poj.html">Pojistovna</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+    <a href="./poj_p.html">Pojistovna jen prelezli</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+    <a href="./gr2.html">Group2</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+    <a href="./gr2_p.html">Group2 jen prelezli</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+    <a href="./all.html">Vsechno</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+    <a href="./all_p.html">Vsechno jen prelezli</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+<?php
+    echo "<a href=\"./soft/fkonfvar.php\" onclick=\"window.open('./soft/konfvar.php','newwindow','width=1200,height=800,location,resizable'); return false;\">Kontrola variant</a>";
+    echo " &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;";
+    echo "<a href=\"./soft/fohodvar.php\">Ohodnotit varianty</a>";
+?>
+    <br>
+    <br>
+    Pro pojistovnu zobrazujeme: 
+    <table><tr><td>
+      <ul>
+      <li> APC <li> ATM <li> BARD1 <li> BRCA1
+      </ul>
+     </td><td>
+      <ul> 
+      <li> BRCA2 <li> BRIP1 <li> CDH1 <li> EPCAM
+      </ul>
+     </td><td>
+      <ul> 
+      <li> CHEK2 <li> MLH1 <li> MSH2 <li> MSH6
+      </ul>
+    </td><td>
+      <ul>
+      <li> MUTYH <li> NBN <li> PALB2 <li> PTEN
+      </ul>
+    </td><td>
+      <ul>
+      <li> RAD50 <li> RAD51C <li> RAD51D <li> STK11
+      </ul>
+    </td><td>
+      <ul>
+      <li> TP53 <li> PMS2 </ul>
+    </td></tr></table>
+    <br>
