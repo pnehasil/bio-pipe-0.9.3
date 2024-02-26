@@ -33,21 +33,6 @@ proc_pic() {
     -O $ofile \
     -ip 300 >> ${FLOG} 2>&1
 
-    log "Remove path to bam from header $ofile"
-
-    TMP_FIL="${G_TMP_DIR}/$bf.del"
-    line=`grep -m1 -n ^#CHROM $ofile`
-    row=`echo $line | cut -d":" -f1`
-    pac=`grep -m1 ^#CHROM $ofile | cut -f10`
-    npac=`basename -s .picard.sorted.rmdup.bam $pac`
-    echo $pac > $TMP_FIL
-    sed -i 's/\//\\\//g' $TMP_FIL
-    spac=`cat $TMP_FIL`
-
-    echo "sed -i '$row s/$spac/$npac/' $ofile" > $TMP_FIL
-    sh $TMP_FIL
-    rm -f $TMP_FIL
-
 }
 
 ###########################  MAIN ###########################

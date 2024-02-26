@@ -86,6 +86,9 @@ for file in `ls ${NPIN_DIR}/*pindel.web`
 # load pocet exonu na gen
    mupip_load ${GTM_DIR} ${BED_DIR}/gen_exon.zwr "-for=zwr" 
 
+# load RNA analyzan
+   mupip_load ${GTM_DIR} ${BED_DIR}/RNA.zwr "-for=zwr" 
+
 # sloupec unknown z GVCF/unkn_col.web
 SRC_UNK="${GVCF_DIR}/unkn_col.web"
 [ -e ${SRC_UNK} ] || error_exit "source ${SRC_UNK} not found"
@@ -96,15 +99,16 @@ gen_uzwr ${SRC_UNK} ${ZWR_FIL} "^UNKN"
 mupip_load ${GTM_DIR} ${ZWR_FIL} "-for=zwr" > ${FLOG} 2>&1
 
 
+log "D ^ADDVKS(\"${MUMPS_DIR}\",\"run_${RUN}\",\"${DBS}\")"
 . ${GTM_DIR}/biowenv
 $gtm_dist/mumps -direct <<-EOF > /dev/null
-        D ^ADDVKS("${MUMPS_DIR}","run_${RUN}")
+        D ^ADDVKS("${MUMPS_DIR}","run_${RUN}","${DBS}")
         halt
 EOF
 
 . ${GTM_DIR}/biowenv
 $gtm_dist/mumps -direct <<-EOF > /dev/null
-        D ^ADDVKP("${MUMPS_DIR}","run_${RUN}")
+        D ^ADDVKP("${MUMPS_DIR}","run_${RUN}","${DBS}")
         halt
 EOF
 

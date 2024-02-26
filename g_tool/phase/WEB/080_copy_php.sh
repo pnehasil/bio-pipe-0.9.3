@@ -11,7 +11,7 @@ PHP_DIR="${OUT_DIR}/soft"
 mkdir ${PHP_DIR} || error_exit "Cannot create ${PHP_DIR}"
 
 echo "<?php" > ${PHP_DIR}/dat.php
-echo "\$database=\"run_${RUN}\";" >> ${PHP_DIR}/dat.php
+echo "\$database=\"run_${RUN}x${DBS}\";" >> ${PHP_DIR}/dat.php
 echo "?>" >> ${PHP_DIR}/dat.php
 
 cp -a ${SP_DIR}/igv  ${PHP_DIR}

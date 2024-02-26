@@ -24,7 +24,7 @@ proc_gen() {
 
     log "Start $file -> sql"
 
-    echo "USE run_${RUN};" > $sql
+    echo "USE run_${RUN}x${DBS};" > $sql
     echo "CREATE TABLE \`$table\` (" >> $sql
     echo '`id` int(11) NOT NULL,' >> $sql
     echo '`gene` varchar(20) DEFAULT NULL,' >> $sql

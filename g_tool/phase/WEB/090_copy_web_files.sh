@@ -6,7 +6,7 @@ load_params "$@"
 
 log "Copy web files to ${WEB_DIR} on ${WEB_IPA}"
 
-WRUN_DIR=${WEB_DIR}/run_${RUN}
+WRUN_DIR=${WEB_DIR}/run_${RUN}x${DBS}
 
 command="mkdir ${WRUN_DIR}"
 rsh -p 7534 pn@${WEB_IPA} $command || error_exit "rsh $command failed"

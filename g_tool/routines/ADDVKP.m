@@ -1,4 +1,4 @@
-ADDVKP(OUTDIR,RUN)
+ADDVKP(OUTDIR,RUN,DBS)
    ; ------------------------------------------------------------------------------------
    ; ^WTP - vystup z gemini:
    ;
@@ -52,6 +52,11 @@ ADDVKP(OUTDIR,RUN)
    ; pridane sloupce PTScarr a superCTRLS plni se z globalu ^PTSCARR a ^SCTRLS
    ; Pro ty jsou pripravene importy.
    ; 
+   ; 23.02.2024
+   ; Pridan parametr DBS pro odliseni runu, bo se nam potkavaji cislo z 001 a 007.
+   ; Tim padem se DB bude jmenovat napr. run_259x001.
+   ;
+
    ; -----------------------------------------------------------------------------------
    ;
    K ^PTMPU
@@ -149,7 +154,7 @@ ADDVKP(OUTDIR,RUN)
    . OPEN OFILE:NEWVERSION
    . S R=0
    . USE OFILE
-   . D CRTABLE(FPAC,RUN)
+   . D CRTABLE(FPAC,RUN,DBS)
    . F  S R=$O(^PTMPU(PAC,R)) Q:R=""  D
    . . S gene=$P(^PTMPU(PAC,R),"|",1)
    . . S codonXchange=$P(^PTMPU(PAC,R),"|",2)
@@ -222,9 +227,9 @@ ADDVKP(OUTDIR,RUN)
    . CLOSE OFILE
    Q
    ;
-CRTABLE(TABLE,RUN)
+CRTABLE(TABLE,RUN,DBS)
    ;
-   W "USE "_RUN_";",!
+   W "USE "_RUN_"x"_DBS_";",!
    W "CREATE TABLE `"_TABLE_"` (",!
    W "      `id` int(11) NOT NULL,",!
    W "      `gene` varchar(22) DEFAULT NULL,",!
