@@ -26,6 +26,8 @@ command="mkdir ${WRUN_DIR}/soft"
 rsh -p 7534 pn@${WEB_IPA} $command || error_exit "rsh $command failed"
 scp -P 7534 ${OUT_DIR}/soft/*php pn@${WEB_IPA}:${WRUN_DIR}/soft || error_exit "scp ${OUT_DIR}/soft/*php to ${WEB_IPA}:${WRUN_DIR}/soft failed"
 scp -P 7534 ${OUT_DIR}/soft/*html pn@${WEB_IPA}:${WRUN_DIR}/soft || error_exit "scp ${OUT_DIR}/soft/*html to ${WEB_IPA}:${WRUN_DIR}/soft failed"
+scp -P 7534 ${OUT_DIR}/soft/*sh pn@${WEB_IPA}:${WRUN_DIR}/soft || error_exit "scp ${OUT_DIR}/soft/*sh to ${WEB_IPA}:${WRUN_DIR}/soft failed"
+scp -P 7534 ${OUT_DIR}/soft/*sql pn@${WEB_IPA}:${WRUN_DIR}/soft || error_exit "scp ${OUT_DIR}/soft/*sql to ${WEB_IPA}:${WRUN_DIR}/soft failed"
 
 command="mkdir ${WRUN_DIR}/soft/igv"
 rsh -p 7534 pn@${WEB_IPA} $command || error_exit "rsh $command failed"

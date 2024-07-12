@@ -63,13 +63,6 @@ echo "</tr>";
 echo "</table>";
 echo "</form>";
 
-echo "<a href=\"filtrace.html\" onclick=\"window.open('filtrace.html','newwindow','width=650,height=600'); return false;\">Popiska filtrace</a>";
-
-
-echo "<br>";
-echo "<br>";
-
-
 $mysqli1 = new mysqli($server_name,$user,$pass,$database);
 if ($mysqli1->connect_errno) {
     echo "Failed to connect to MySQL: (" . $mysqli1->connect_errno . ") " . $mysqli1->connect_error;
@@ -82,6 +75,46 @@ if ($mysqli2->connect_errno) {
 $mysqli2->set_charset("utf8");
 
 //echo $mysqli1->host_info . "\n";
+
+echo "<a href=\"filtrace.html\" onclick=\"window.open('filtrace.html','newwindow','width=650,height=600'); return false;\">Popiska filtrace</a>";
+
+
+echo "<br>";
+echo "<br>";
+
+$mysqli4 = new mysqli($server_name,$user,$pass,$database);
+if ($mysqli4->connect_errno) {
+    echo "Failed to connect to MySQL: (" . $mysqli4->connect_errno . ") " . $mysqli4->connect_error;
+}
+$mysqli4->set_charset("utf8");
+
+$MPAC=$PAC . "_MSH2";
+
+$res4=$mysqli4->query("SELECT * FROM $MPAC ;");
+$cnt4 = $res4->num_rows;
+
+if($cnt4 > 0) {
+  $row4 = $res4->fetch_assoc();
+  $xmutG = $row4['mutG'] ;
+  $xallG = $row4['allG'] ;
+  $xmutT = $row4['mutT'] ;
+  $xallT = $row4['allT'] ;
+ 
+  $procG = 100*$xmutG/$xallG;
+  $procT = 100*$xmutT/$xallT;
+
+  if(($xmutG > 5) or ($procG > 10))  {
+     echo "<B> Podezreni na mutaci v <a href=\"./igv.php?chr=chr2&start=47641559&pac=$PAC&run=$database\" target=\"blank\"><b>MSH2</b></a> G>$xmutG vsech readu>$xallG  freq>$procG </B>"; }
+
+  if(($xmutT > 5) or ($procT > 10))  {
+     echo "<BR><B> Podezreni na mutaci v <a href=\"./igv.php?chr=chr2&start=47641559&pac=$PAC&run=$database\" target=\"blank\"><b>MSH2</b></a> T>$xmutT vsech readu>$xallT  freq>$procT </B>"; }
+
+}
+
+mysqli_close($mysqli4);
+
+echo "<br>";
+echo "<br>";
 
 $FPAC=$PAC . "_fi";
 $mysqli1->real_query("SELECT * FROM $FPAC ORDER BY `group`,priority");
@@ -334,8 +367,7 @@ while ($row1 = $res1->fetch_assoc()) {
     echo "<td> <a href=\"$vtablnk\" target=\"_blank\">$xaa_change</a> </td><td> $xexon </td>";
     echo "<td> $xqual </td><td> $xdepth </td><td> $ximpact_so </td><td> $vzd </td>";
     echo "<td> <a href=\"$adr\" target=\"_blank\"> $xclinvar_sig </a> </td>";
-    echo "<td>  $xclinvar_rev </td>";
-
+    echo "<td> <a href=\"clintab.php\" onclick=\"window.open('clintab.php?chr=$xchrom&start=$xstart&end=$xend&ref=$xref&alt=$xalt','newwindow','width=650,height=200'); return false;\"> $xclinvar_rev </td>";
     echo "<td><a href=\"nvtab.php\" onclick=\"window.open('nvtab.php?pac=$PAC&chr=$xchrom&start=$xstart&end=$xend&ref=$xref&alt=$xalt','newwindow','width=650,height=300'); return false;\">$NV</a></td>";
 
     echo "<td> $xCzecanca_kons </td>";

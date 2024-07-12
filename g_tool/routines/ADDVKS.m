@@ -56,6 +56,8 @@ ADDVKS(OUTDIR,RUN,DBS)
    ; Pridan parametr DBS pro odliseni runu, bo se nam potkavaji cislo z 001 a 007.
    ; Tim padem se DB bude jmenovat napr. run_259x001.
    ; 
+   ; 24.06.2024
+   ; clinvar_disease_name text(1024) -> text(2048)
    ; -----------------------------------------------------------------------------------
    ;
    K ^WTMPU
@@ -272,7 +274,7 @@ CRTABLE(TABLE,RUN,DBS)
    W "      `allele_bal` varchar(10) DEFAULT NULL,",!
    W "      `rs_ids` varchar(60) DEFAULT NULL,",!
    W "      `in_omim` int(3) DEFAULT NULL,",!
-   W "      `clinvar_disease_name` varchar(1024) DEFAULT NULL,",!
+   W "      `clinvar_disease_name` varchar(2047) DEFAULT NULL,",!
    W "      `rmsk` varchar(400) DEFAULT NULL,",!
    W "      `zwt` int(11) DEFAULT NULL,",!
    W "      `zalt` int(11) DEFAULT NULL,",!

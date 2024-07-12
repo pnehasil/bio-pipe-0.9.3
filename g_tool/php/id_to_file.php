@@ -231,12 +231,16 @@ while ($row1 = $res1->fetch_assoc()) {
    if ($zobraz == 0) {
       $pos = strpos($xclinvar_sig,'athogen');
       if ($pos == true) { $zobraz = 1;}
-      if (($xclinvar_sig == 'conflicting_interpretations_of_pathogenicity')) { $zobraz = 0;}
+      if ($xclinvar_sig == 'conflicting_interpretations_of_pathogenicity') { $zobraz = 0;}
+      if ($xclinvar_sig == 'conflicting_classifications_of_pathogenicity') { $zobraz = 0;}
+
    }
 
 
    if($NV > 2) { $zobraz = 1;}
    if($xCzecanca_kons > 2) { $zobraz = 1;}
+
+   if($NV == 8) { $zobraz = 0;}
 
    if($NV == 6) { $NV="risk";}
    if($NV == 7) { $NV="drug";}

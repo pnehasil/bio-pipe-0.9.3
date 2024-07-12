@@ -15,14 +15,16 @@ pod="_"
 echo "export RUN=\"run_${RUN}x${DBS}\"" > ${OUT_FIL}
 cat ${WOR_HOME}/scripts/gen_ftab.sh >> ${OUT_FIL}
 
+echo "scp -P 7534 ${WOR_HOME}/php/id_to_file.php pn@${WEB_IPA}:${WRUN_DIR}/soft" 
 scp -P 7534 ${WOR_HOME}/php/id_to_file.php pn@${WEB_IPA}:${WRUN_DIR}/soft || error_exit "scp ${OUT_DIR}/soft/*php to ${WEB_IPA}:${WRUN_DIR}/soft failed"
+echo "scp -P 7534 ${OUT_FIL} pn@${WEB_IPA}:${WRUN_DIR}/soft"
 scp -P 7534 ${OUT_FIL} pn@${WEB_IPA}:${WRUN_DIR}/soft || error_exit "scp ${OUT_DIR}/soft/*php to ${WEB_IPA}:${WRUN_DIR}/soft failed"
 
 command="sh ${WRUN_DIR}/soft/gen_cop.sh /mnt/sdc/www/runy/run_${RUN}x${DBS}/soft"
 echo $command
 rsh -p 7534 pn@${WEB_IPA} $command || error_exit "rsh $command failed"
 
-
+########################
 
 #cp ${WOR_HOME}/php/id_to_file.php ${G_TMP_DIR}
 

@@ -16,11 +16,11 @@ proc_gemini() {
    dbfile=$1
    vcf_file=${GEMINI_DATA}/clinvar_20190102.tidy.vcf.gz
 
-   log "Start add CLNREVSTAT $ifile -> $dbfile"
+   log "Start add CLNREVSTAT, CLNSIGCONF $ifile -> $dbfile"
    ${GEMINI_DIR}/gemini annotate -f $vcf_file -c CLNREVSTAT -a extract -e CLNREVSTAT -t text -o list $dbfile
-   #${GEMINI_DIR}/gemini load -v $ifile -t snpEff --cores 1 $dbfile >>${FLOG} 2>>${FLOG}
+   ${GEMINI_DIR}/gemini annotate -f $vcf_file -c CLNSIGCONF -a extract -e CLNSIGCONF -t text -o list $dbfile
 
-   log "End add CLNREVSTAT $ifile -> $dbfile"
+   log "End add CLNREVSTAT,CLNSIGCONF $ifile -> $dbfile"
 }
 
 ###########################  MAIN ###########################
@@ -31,7 +31,7 @@ log "Start add CLNREVSTAT into gemini DB parallel ${GATK_VCF_JED_GEM} max ${MAX_
 [ -d ${GATK_VCF_JED} ] || error_exit "${GATK_VCF_JED} not found"
 [ -d ${GATK_VCF_JED_GEM} ] || error_exit "${GATK_VCF_JED_GEM} not found"
 
-FLOG=${WOR_LOGDIR}/${phase}_150_$(date +%y%m%d-%H%M%S).log
+FLOG=${WOR_LOGDIR}/${phase}_155_$(date +%y%m%d-%H%M%S).log
 
 #execute max n jobs at once
 JOBMAX=${MAX_JOBS}

@@ -56,7 +56,9 @@ ADDVKP(OUTDIR,RUN,DBS)
    ; Pridan parametr DBS pro odliseni runu, bo se nam potkavaji cislo z 001 a 007.
    ; Tim padem se DB bude jmenovat napr. run_259x001.
    ;
-
+   ; 20.05.2024
+   ; Zvetsen rozsah vybranich sloupcu v tabulce, bo to porad padalo.
+   ;
    ; -----------------------------------------------------------------------------------
    ;
    K ^PTMPU
@@ -233,19 +235,19 @@ CRTABLE(TABLE,RUN,DBS)
    W "CREATE TABLE `"_TABLE_"` (",!
    W "      `id` int(11) NOT NULL,",!
    W "      `gene` varchar(22) DEFAULT NULL,",!
-   W "      `codon_change` varchar(510) DEFAULT NULL,",!
-   W "      `aa_change` varchar(510) DEFAULT NULL,",!
+   W "      `codon_change` text(12000) DEFAULT NULL,",!
+   W "      `aa_change` text(12000) DEFAULT NULL,",!
    W "      `exon` varchar(9) DEFAULT NULL,",!
    W "      `qual` decimal(13,8) DEFAULT NULL,",!
    W "      `depth` varchar(10) DEFAULT NULL,",!
    W "      `num_alleles` int(1) DEFAULT NULL,",!
    W "      `clinvar_sig` varchar(160) DEFAULT NULL,",!
-   W "      `clinvar_rev` varchar(160) DEFAULT NULL,",!
+   W "      `clinvar_rev` varchar(1600) DEFAULT NULL,",!
    W "      `x01_UBEO_Class` varchar(10) DEFAULT NULL,",!
    W "      `Czecanca_kons` varchar(30) DEFAULT NULL,",!
    W "      `max_aaf_all` decimal(16,14) DEFAULT NULL,",!
    W "      `aaf_esp_ea` decimal(16,14) DEFAULT NULL,",!
-   W "      `impact_so` varchar(50) DEFAULT NULL,",!
+   W "      `impact_so` varchar(500) DEFAULT NULL,",!
    W "      `VIK_9carrier` varchar(5) DEFAULT NULL,",!
    W "      `VIK_unknown` varchar(5) DEFAULT NULL,",!
    W "      `aaf_esp_all` decimal(16,14) DEFAULT NULL,",!
@@ -267,8 +269,8 @@ CRTABLE(TABLE,RUN,DBS)
    W "      `chrom` varchar(10) DEFAULT NULL,",!
    W "      `start` int(11) DEFAULT NULL,",!
    W "      `end` int(11) DEFAULT NULL,",!
-   W "      `ref` varchar(5000) DEFAULT NULL,",!
-   W "      `alt` varchar(5000) DEFAULT NULL,",!
+   W "      `ref` text(12000) DEFAULT NULL,",!
+   W "      `alt` text(12000) DEFAULT NULL,",!
    W "      `num_reads_w_dels` varchar(10) DEFAULT NULL,",!
    W "      `allele_count` int(2) DEFAULT NULL,",!
    W "      `allele_bal` varchar(10) DEFAULT NULL,",!
@@ -281,8 +283,8 @@ CRTABLE(TABLE,RUN,DBS)
    W "      `priority` int(11) DEFAULT NULL,",!
    W "      `gunknown` varchar(22) DEFAULT NULL,",!
    W "      `aaf_gnomad_all` varchar(400) DEFAULT NULL,",!
-   W "      `aaf_gnomad_nfe` varchar(20) DEFAULT NULL,",!
-   W "      `aaf_gnomad_non_cancer` varchar(20) DEFAULT NULL,",!
+   W "      `aaf_gnomad_nfe` varchar(200) DEFAULT NULL,",!
+   W "      `aaf_gnomad_non_cancer` varchar(200) DEFAULT NULL,",!
    W "      `gnomad_popmax_AF` varchar(200) DEFAULT NULL,",!
    W "      `gnomad_num_het` int(11) DEFAULT NULL,",!
    W "      `gnomad_num_hom_alt` int(11) DEFAULT NULL,",!

@@ -32,6 +32,7 @@ GATK3_VCF_DIR="${OUT_DIR}/GATK3"
 GATK4_VCF_DIR="${OUT_DIR}/GATK4"
 GVCF3_DIR="${OUT_DIR}/GVCF3"
 GVCF4_DIR="${OUT_DIR}/GVCF4"
+VARSC_DIR="${OUT_DIR}/VARSCAN"
 
 
 log "Check ref folder ${REF}"
@@ -105,6 +106,9 @@ BIN_DIR="${REF}/bin_dir"
 JAVA8_BIN="${REF}/java8_bin"
 [ -d ${JAVA8_BIN} ] || error_exit "${JAVA8_BIN} not found"
 
+VARSCAN_BIN="${REF}/Varscan_bin"
+[ -d ${VARSCAN_BIN} ] || error_exit "${VARSCAN_BIN} not found"
+
 mkdir ${OUT_DIR} || error_exit "Cannot create ${OUT_DIR}"
 mkdir ${RG_DIR} || error_exit "Cannot create ${RG_DIR}"
 mkdir ${SAM_DIR} || error_exit "Cannot create ${SAM_DIR}"
@@ -127,6 +131,7 @@ mkdir ${GATK3_VCF_DIR} || error_exit "Cannot create ${GATK3_VCF_DIR}"
 mkdir ${GATK4_VCF_DIR} || error_exit "Cannot create ${GATK4_VCF_DIR}"
 mkdir ${GVCF3_DIR} || error_exit "Cannot create ${GVCF3_DIR}"
 mkdir ${GVCF4_DIR} || error_exit "Cannot create ${GVCF4_DIR}"
+mkdir ${VARSC_DIR} || error_exit "Cannot create ${VARSC_DIR}"
 
 log "Create exp_lib"
 
@@ -159,6 +164,7 @@ echo "export GATK3_VCF_DIR=${GATK3_VCF_DIR} " >> ${WOR_LIB}/bioenv
 echo "export GATK4_VCF_DIR=${GATK4_VCF_DIR} " >> ${WOR_LIB}/bioenv
 echo "export GVCF3_DIR=${GVCF3_DIR} " >> ${WOR_LIB}/bioenv
 echo "export GVCF4_DIR=${GVCF4_DIR} " >> ${WOR_LIB}/bioenv
+echo "export VARSC_DIR=${VARSC_DIR} " >> ${WOR_LIB}/bioenv
 
 echo "# " >> ${WOR_LIB}/bioenv
 
@@ -185,6 +191,7 @@ echo "export VEP_DIR=${VEP_DIR} " >> ${WOR_LIB}/bioenv
 echo "export VEP_CACHE=${VEP_CACHE} " >> ${WOR_LIB}/bioenv
 echo "export BIN_DIR=${BIN_DIR} " >> ${WOR_LIB}/bioenv
 echo "export JAVA8_BIN=${JAVA8_BIN} " >> ${WOR_LIB}/bioenv
+echo "export VARSCAN_BIN=${VARSCAN_BIN} " >> ${WOR_LIB}/bioenv
 
 # server specific environment variables
 

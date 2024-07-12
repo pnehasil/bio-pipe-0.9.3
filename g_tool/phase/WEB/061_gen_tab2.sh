@@ -24,21 +24,21 @@ cat ${SRC_VIK} | cut -f1-3,7,8,143,145 | sed 's/\t/|/g' > ${TMP_FIL}
 sed -i '1d' ${TMP_FIL}
 
 gen_vzwr ${TMP_FIL} ${ZWR_FIL} "^VIKO" 
-mupip_load ${GTM_DIR} ${ZWR_FIL} "-for=zwr" > ${FLOG} 2>&1
+mupip_load ${GTM_DIR} ${ZWR_FIL} "-for=zwr" >> ${FLOG} 2>&1
 
 # load PTScarr a SCTRLS
 log "Load sctrls.zwr"
 ZWR_SCTR="${BED_DIR}/sctrls.zwr"
 [ -e ${ZWR_SCTR} ] || error_exit "source ${ZWR_SCTR} not found"
-mupip_load ${GTM_DIR} ${ZWR_SCTR} "-for=zwr" > ${FLOG} 2>&1
+mupip_load ${GTM_DIR} ${ZWR_SCTR} "-for=zwr" >> ${FLOG} 2>&1
 
 
 log "Load ptscarr.zwr"
 ZWR_PTSC="${BED_DIR}/ptscarr.zwr"
 [ -e ${ZWR_PTSC} ] || error_exit "source ${ZWR_PTSC} not found"
-mupip_load ${GTM_DIR} ${ZWR_PTSC} "-for=zwr" > ${FLOG} 2>&1
+mupip_load ${GTM_DIR} ${ZWR_PTSC} "-for=zwr" >> ${FLOG} 2>&1
 
-
+log "Load WTMP.zwr"
 #001_PKM85_run118.GATK_regions.web
 for file in `ls ${SRC_DIR}/*GATK_regions.web`
   do
@@ -51,6 +51,7 @@ for file in `ls ${SRC_DIR}/*GATK_regions.web`
 
   done
 
+log "Load VEP.zwr"
 #001_PKM85_run118.GATK_regions_vep.web
 for file in `ls ${SRC_DIR}/*GATK_regions_vep.web`
   do
@@ -59,10 +60,12 @@ for file in `ls ${SRC_DIR}/*GATK_regions_vep.web`
     pac=`echo $bf | cut -d"_" -f1,2`
    
    gen_vepzwr $file $pac "^VEP" $ofile
+   sed -i '3d' $ofile
    mupip_load ${GTM_DIR} $ofile "-for=zwr" >> ${FLOG} 2>&1
 
   done
 
+log "Load PTMP.zwr"
 #007_BRCA7475_run73.pindel.web
 for file in `ls ${NPIN_DIR}/*pindel.web`
   do
@@ -96,7 +99,7 @@ SRC_UNK="${GVCF_DIR}/unkn_col.web"
 ZWR_FIL=${TMP_DIR}/unk_tmp.zwr
 
 gen_uzwr ${SRC_UNK} ${ZWR_FIL} "^UNKN"
-mupip_load ${GTM_DIR} ${ZWR_FIL} "-for=zwr" > ${FLOG} 2>&1
+mupip_load ${GTM_DIR} ${ZWR_FIL} "-for=zwr" >> ${FLOG} 2>&1
 
 
 log "D ^ADDVKS(\"${MUMPS_DIR}\",\"run_${RUN}\",\"${DBS}\")"
@@ -106,6 +109,7 @@ $gtm_dist/mumps -direct <<-EOF > /dev/null
         halt
 EOF
 
+log "D ^ADDVKP(\"${MUMPS_DIR}\",\"run_${RUN}\",\"${DBS}\")"
 . ${GTM_DIR}/biowenv
 $gtm_dist/mumps -direct <<-EOF > /dev/null
         D ^ADDVKP("${MUMPS_DIR}","run_${RUN}","${DBS}")
@@ -118,6 +122,8 @@ EOF
 #        D ^ADDPVAR("${MUMPS_DIR}","${RUN}")
 #        halt
 #EOF
+
+log "CHECK LOG"
 
 grep -i ERROR ${FLOG}
 if [ $? -eq 0 ]

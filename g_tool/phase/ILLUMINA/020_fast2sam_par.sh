@@ -15,17 +15,13 @@ proc_fasq() {
 
    cfile=$1
    file=`basename $cfile`
-   log "Counting statistics $file"
-        ${NOVOALIGN_DIR}/novoalign -d ${REF_DIR}/hg19.nix -f ${SRC}/${file}*R1.fastq.gz ${SRC}/${file}*R2.fastq.gz -#50K -i 250,90 -c ${FAST2SAM_THR} -e 500 -o SAM 2> ${TMP_DIR}/${file}.stat.mapstat > ${TMP_DIR}/${file}.stat.sam 
-
-   log "End statistics $file"
-
-   line=`cat ${TMP_DIR}/$file.stat.mapstat | grep "Mean"`
-   mean=`echo $line | awk '{print $3}' | sed 's/,//'`
-   stdev=`echo $line | awk '{print $6}' | cut -f1 -d"."`
 
    log "Start full $file"
-    ${NOVOALIGN_DIR}/novoalign -d ${REF_DIR}/hg19.nix -f ${SRC}/${file}*R1.fastq.gz ${SRC}/${file}*R2.fastq.gz -i $mean,$stdev -c ${FAST2SAM_THR} -e 500 -o SAM 2> ${MAPS_DIR}/${file}.mapstat > ${SAM_DIR}/${file}.sam
+
+    /mnt/raid/Shared/bwa2/bwa-mem2 mem -t ${FAST2SAM_THR} \
+   ${REF_DIR}/HG19uscs.fa \
+   ${SRC}/${file}*R1.fastq.gz \
+   ${SRC}/${file}*R2.fastq.gz > ${SAM_DIR}/${file}.sam 2>${FLOG}
 
    log "End full $file"
 }
@@ -33,10 +29,11 @@ proc_fasq() {
 ###########################  MAIN ###########################
 
 TMP_DIR="${G_TMP_DIR}/tmp_$$"
+FLOG=${WOR_LOGDIR}/${phase}_020_$(date +%y%m%d-%H%M%S).log
 log "Create tmp dir ${TMP_DIR}"
 mkdir ${TMP_DIR} || error_exit "Cannot create ${TMP_DIR}"
 
-log "Starting novoalign parallel process for files in ${SRC} max ${MAX_JOBS} job(s)"
+log "Starting BWA parallel process for files in ${SRC} max ${MAX_JOBS} job(s)"
 
 #execute max n jobs at once
 JOBMAX=${MAX_JOBS}
@@ -55,4 +52,4 @@ wait
 log "remove ${TMP_DIR}"  
 rm -rf ${TMP_DIR}
 
-log "Novoalign done"
+log "BWA done"

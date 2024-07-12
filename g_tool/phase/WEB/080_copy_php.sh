@@ -28,3 +28,5 @@ cp -a ${SP_DIR}/igv  ${PHP_DIR}
 
 cp ${SP_DIR}/*php ${PHP_DIR}
 cp ${SP_DIR}/*html ${PHP_DIR}
+cp ${SP_DIR}/*sh ${PHP_DIR}
+cp ${SP_DIR}/*sql ${PHP_DIR}

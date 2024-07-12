@@ -6,7 +6,7 @@ load_params "$@"
  log "### Cnv remote part 1 ###"
 
  CNV_PORT=2233
- CNV_IP="10.2.46.147"
+ CNV_IP="10.2.46.166"
 
  command="rm -rf /mnt/raid/users/petra/petr/run$RUN"
  rsh -p ${CNV_PORT} petra@${CNV_IP} $command || error_exit "rsh $command failed"

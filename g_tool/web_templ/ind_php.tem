@@ -96,7 +96,7 @@ $zsoubor = fopen("../../tmp/zsanger_XXRUNXX.csv", "w");
      $xzwt = $row4['zwt'] ;
      $xzalt = $row4['zalt'] ;
      $xrs_ids = $row4['rs_ids'] ;
-     $ximpact_so = $row4['impact_so'] 
+     $ximpact_so = $row4['impact_so'] ;
 
 
      // upravime poradi u aa_change
