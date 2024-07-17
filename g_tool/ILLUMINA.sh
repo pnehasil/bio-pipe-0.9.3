@@ -22,7 +22,7 @@ $@
 -e 135 \
 $@ 
 
-/mnt/raid/Workspace/Wor96N/g_tool/g_go.sh \
+/mnt/raid/Workspace/WorXX/g_tool/g_go.sh \
 -p ILLUMINA \
 -s /mnt/raid/Workspace/WorXX/Prijem \
 -t /mnt/raid/Workspace/WorXX \
