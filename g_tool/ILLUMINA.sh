@@ -30,5 +30,5 @@ $@
 -f /mnt/raid/Workspace/WorXX/Linky \
 -z CONF \
 -b 140 \
--e 210 \
+-e 260 \
 $@ 
