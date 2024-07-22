@@ -4,7 +4,7 @@
 -s /mnt/xraid/Workspace/WorXX/Prijem \
 -t /mnt/xraid/Workspace/WorXX \
 -r XX \
--d 007 \
+-d CCC \
 -f /mnt/xraid/Workspace/WorXX/Linky \
 -z FOSFOR \
 -b 10 \
