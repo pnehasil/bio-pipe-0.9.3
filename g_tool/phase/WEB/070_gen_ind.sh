@@ -67,12 +67,16 @@ cat ${WOR_HOME}/web_templ/ind_3.tem >> ${OUT_FIL}
 
 cd ${OUT_DIR}/det
 
-for file in `ls ${OUT_DIR}/det/*csv | grep -v "\.p_"`
+#for file in `ls ${OUT_DIR}/det/*csv | grep -v "\.p_"`
+for file in `ls ${OUT_DIR}/TABS/*vcf.zwr`
   do
-    bf=`basename -s .csv $file`
-    pac=`echo $bf | cut -d"_" -f2`
+    #bf=`basename -s .csv $file`
+    mf=`basename  $file | cut -d"." -f1`
+    bf=`basename $file | cut -d"_" -f1,2`; bf=$bf$pod${RUN}
+    pac=`echo $bf | cut -d"_" -f2 `
     echo "   <a href=\"./soft/ukaz_first.php?pac=$pac\">$bf.php</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" >> ${OUT_FIL} 
-    echo "   <a href=\"./det/$bf.csv\">$bf.csv</a>" >> ${OUT_FIL} 
+    echo "   <a href=\"./det/$bf.csv\">$bf.csv</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" >> ${OUT_FIL} 
+    echo "   <a href=\"./modraci/$mf.html\">$mf.html</a> " >> ${OUT_FIL} 
     echo "   <br>" >> ${OUT_FIL}
   done
 

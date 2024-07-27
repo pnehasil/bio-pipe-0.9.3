@@ -18,6 +18,10 @@ command="mkdir ${WRUN_DIR}/det"
 rsh -p 7534 pn@${WEB_IPA} $command || error_exit "rsh $command failed"
 scp -P 7534 ${OUT_DIR}/det/* pn@${WEB_IPA}:${WRUN_DIR}/det || error_exit "scp ${OUT_DIR}/det/* to ${WEB_IPA}:${WRUN_DIR}/det failed"
 
+command="mkdir ${WRUN_DIR}/modraci"
+rsh -p 7534 pn@${WEB_IPA} $command || error_exit "rsh $command failed"
+scp -r  -P 7534 ${OUT_DIR}/modraci/* pn@${WEB_IPA}:${WRUN_DIR}/modraci || error_exit "scp ${OUT_DIR}/modraci/* to ${WEB_IPA}:${WRUN_DIR}/modraci failed"
+
 command="mkdir ${WRUN_DIR}/img"
 rsh -p 7534 pn@${WEB_IPA} $command || error_exit "rsh $command failed"
 scp -P 7534 ${OUT_DIR}/img/* pn@${WEB_IPA}:${WRUN_DIR}/img || error_exit "scp ${OUT_DIR}/img/* to ${WEB_IPA}:${WRUN_DIR}/img failed"
