@@ -59,6 +59,8 @@ ADDVKP(OUTDIR,RUN,DBS)
    ; 20.05.2024
    ; Zvetsen rozsah vybranich sloupcu v tabulce, bo to porad padalo.
    ;
+   ; 13.8.2024 
+   ; `gene` varchar(22) -> `gene` varchar(48)
    ; -----------------------------------------------------------------------------------
    ;
    K ^PTMPU
@@ -234,7 +236,7 @@ CRTABLE(TABLE,RUN,DBS)
    W "USE "_RUN_"x"_DBS_";",!
    W "CREATE TABLE `"_TABLE_"` (",!
    W "      `id` int(11) NOT NULL,",!
-   W "      `gene` varchar(22) DEFAULT NULL,",!
+   W "      `gene` varchar(48) DEFAULT NULL,",!
    W "      `codon_change` text(12000) DEFAULT NULL,",!
    W "      `aa_change` text(12000) DEFAULT NULL,",!
    W "      `exon` varchar(9) DEFAULT NULL,",!

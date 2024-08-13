@@ -22,7 +22,7 @@ proc_mod() {
     bf=`basename -s .dep $file`
     hfile=${MOUT_DIR}/$bf.html
 
-    R --slave --no-restore --file=/mnt/xraid/Workspace/Wor264T/g_tool/phase/WEB/modraky.R --args "$file" "$bf" "$MOUT_DIR/"
+    R --slave --no-restore --file=${WOR_PHASE_DIR}/modraky.R --args "$file" "$bf" "$MOUT_DIR/"
 
     cat ${WOR_HOME}/web_templ/poj_1.tem > ${hfile}
     echo "<center><h3> Run ${RUN} </h3></center>" >> ${hfile}
@@ -30,21 +30,32 @@ proc_mod() {
 
     echo "<table>" >> ${hfile}
 
-    cnt=0
+    xcnt=0
     for img in `ls ${MOUT_DIR}/$bf*png`
       do
 	 bimg=`basename $img`
 	 himg=`basename $img | sed 's/png/html/'`
-	 mod=`echo $(($cnt%4))`
+	 fullhtml=`echo $img | sed 's/png/html/'`
+	 mod=`echo $(($xcnt%4))`
+
+	 #z html zjistime o jaky gen jde
+	 rm -f ./pom_$CNT ./ppom_$CNT
+	 cat $fullhtml | sed 's/,/ /g' > ./pom_$CNT
+	 for line in `cat ./pom_$CNT`
+           do
+             echo $line >> ./ppom_$CNT
+           done
+         gene=`grep title ./ppom_$CNT | grep text | uniq | cut -d":" -f3 | sed 's/"//g'`
 
 	 echo $mod
+	 echo $gene
 
          if [ $mod -eq 0 ]
 	 then
 	    echo "<tr>" >> ${hfile}
 	 fi
 
-	 echo "<td> <a href=./$himg> <img src=./$bimg width=\"400\"></a> </td>" >> ${hfile}
+	 echo "<td> <a href=./$bimg> $gene </a> <br> <a href=./$himg> <img src=./$bimg width=\"400\"></a> </td>" >> ${hfile}
 
          if [ $mod -eq 3 ]
 	 then
@@ -52,7 +63,7 @@ proc_mod() {
 	    echo "<tr><td height=\"80\"> </td></tr>" >>  ${hfile}
 	 fi
 
-         cnt=`expr $cnt + 1`
+         xcnt=`expr $xcnt + 1`
 
       done
 
