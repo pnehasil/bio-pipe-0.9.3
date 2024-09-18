@@ -23,13 +23,32 @@ proc() {
     bf=`basename -s .picard.sorted.RG.realigned.recal.rmdup.bam $file`
     ofile=${VARSC_DIR}/xgrep/$bf.cnt
     tfile=${VARSC_DIR}/xgrep/$bf.sel.bam
+    utfile=${VARSC_DIR}/xgrep/$bf.sel.up.bam
 
-    ${SAMTOOLS_DIR}/samtools view $file "chr2:47641559-47641561" > $tfile 2>>${FLOG}
-    mutG=`grep GAAAAAAAAAAAA $tfile | wc -l`
-    allG=`grep AAAAAAAAAAAAA $tfile | wc -l`
+    ${SAMTOOLS_DIR}/samtools view $file "chr2:47641559-47641561" | cut -f4,10 > $tfile 2>>${FLOG}
 
-    mutT=`grep TTAAAAAAAAAAA $tfile | wc -l`
-    allT=`grep AAAAAAAAAAAAA $tfile | wc -l`
+    rm -f $utfile
+    for line in `cat $tfile | sed 's/\t/#/'`
+       do
+	  kor1=`echo $line | cut -d"#" -f1`
+	  str=`echo $line | cut -d"#" -f2`
+
+	  if [ $kor1 -lt 47641558 ]
+	    then
+               odecist=`expr 47641558 - $kor1`
+	       upstr=${str:$odecist:30}
+	       echo $upstr >> $utfile
+             else
+	       upstr=${str:0:30}
+	       echo $upstr >> $utfile
+	  fi
+       done
+
+    mutG=`grep GAAAAAAAAAAAA $utfile | wc -l`
+    allG=`grep AAAAAAAAAAAAA $utfile | wc -l`
+
+    mutT=`grep TTAAAAAAAAAAA $utfile | wc -l`
+    allT=`grep AAAAAAAAAAAAA $utfile | wc -l`
 
     echo $bf#$mutG#$allG#$mutT#$allT > $ofile
 
