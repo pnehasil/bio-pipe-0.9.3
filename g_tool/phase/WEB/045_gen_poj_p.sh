@@ -72,6 +72,7 @@ for gen in `cat ${LIST}`
        echo "     <a href=\"./img/$im\"><img src=./img/$imm border=\"0\" width=\"550\"></a>" >> ${OUT_FIL} 
        echo "    <br>" >> ${OUT_FIL}
        echo "    <button type=\"button\" onclick=\"window.open('./tgen_$gen.html','newwindow','width=800,height=600'); return false;\">Detaily?</button>" >> ${OUT_FIL}
+       echo "    <button type=\"button\" onclick=\"window.open('./cgen_$gen.html','newwindow','width=800,height=600'); return false;\">CNV</button>" >> ${OUT_FIL}
        echo "    <br>" >> ${OUT_FIL}
        echo "  </td>" >> ${OUT_FIL}
     fi
@@ -82,6 +83,7 @@ for gen in `cat ${LIST}`
        echo "     <a href=\"./img/$im\"><img src=./img/$imm border=\"0\" width=\"550\"></a>" >> ${OUT_FIL} 
        echo "    <br>" >> ${OUT_FIL}
        echo "    <button type=\"button\" onclick=\"window.open('./tgen_$gen.html','newwindow','width=800,height=600'); return false;\">Detaily?</button>" >> ${OUT_FIL}
+       echo "    <button type=\"button\" onclick=\"window.open('./cgen_$gen.html','newwindow','width=800,height=600'); return false;\">CNV</button>" >> ${OUT_FIL}
        echo "  </td>" >> ${OUT_FIL}
     fi
     if [ "$cnt" -eq 3 ]
@@ -91,6 +93,7 @@ for gen in `cat ${LIST}`
        echo "     <a href=\"./img/$im\"><img src=./img/$imm border=\"0\" width=\"550\"></a>" >> ${OUT_FIL} 
        echo "    <br>" >> ${OUT_FIL}
        echo "    <button type=\"button\" onclick=\"window.open('./tgen_$gen.html','newwindow','width=800,height=600'); return false;\">Detaily?</button>" >> ${OUT_FIL}
+       echo "    <button type=\"button\" onclick=\"window.open('./cgen_$gen.html','newwindow','width=800,height=600'); return false;\">CNV</button>" >> ${OUT_FIL}
        echo "  </td>" >> ${OUT_FIL}
        echo "</tr>" >> ${OUT_FIL}
        echo "<tr><td height=\"80\"> </td></tr>" >> ${OUT_FIL}
