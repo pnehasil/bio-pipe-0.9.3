@@ -1,0 +1,45 @@
+
+include "./soft/kkk.php";
+include "./soft/dat.php";
+
+$mysqli5 = new mysqli($server_name,$user,$pass,$database);
+if ($mysqli5->connect_errno) {
+    echo "Failed to connect to MySQL: (" . $mysqli4->connect_errno . ") " . $mysqli4->connect_error;
+}
+
+unlink('../../tmp/cnvXXRUNXX.csv');
+$ssoubor = fopen("../../tmp/cnvXXRUNXX.csv", "w");
+
+echo "<b>CNV pro Baru a Tanu</b> <br><br>";
+echo "<table border=2>";
+echo "<tr bgcolor=e0e0e0>";
+echo "<td> Pacient </td><td> chrom </td><td> start </td><td> end </td><td> koordinaty </td><td> exon </td><td> gen </td><td> Smazat? </td></tr>";
+
+$res5=$mysqli5->query("SELECT * FROM cnv;");
+while ($row5 = $res5->fetch_assoc()) {
+
+     $xpac = $row5['pac'] ;
+     $xchr = $row5['chr'] ;
+     $xstart = $row5['start'] ;
+     $xend = $row5['end'] ;
+     $xkor = $row5['kor'] ;
+     $xexon = $row5['exon'] ;
+     $xgen = $row5['gen'] ;
+
+     echo "<tr><td><b> $xpac </b></td><td> $xchr </td><td> $xstart </td><td> $xend </td> ";
+     echo "<td> $xkor </td><td> $xexon </td><td> $xgen </td>";
+     echo "<td align=center><a href=\"./soft/delcnv.php?pac=$xpac&kor=$xkor\"> X </a></td>";
+     echo "</tr>";
+
+     fwrite($ssoubor, "$xchr|$xstart|$xend|$xkor|$xexon|$xgen||||$xpac||||$xpac|$xpac\r\n");
+
+}
+mysqli_close($mysqli5);
+
+echo "</table>";
+fclose($ssoubor);
+
+echo "<tr><td> </td>";
+echo "<td> </td> <td> <a href=\"../../tmp/cnvXXRUNXX.csv\">Tabulka v csv</a> </td>";
+echo "</tr></table>";
+

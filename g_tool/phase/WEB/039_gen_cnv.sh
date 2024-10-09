@@ -37,6 +37,9 @@ for tfile in `ls ${OUT_DIR}/tgen_*.txt`
     rm -f $ofile
     echo "<br>" >> $ofile
     echo "<br>" >> $ofile
+    echo "<B> $gen </B>" >> $ofile
+    echo "<br>" >> $ofile
+    echo "<br>" >> $ofile
     echo "<table border=1>" >> $ofile
     for line in `cat $tfile | sed 's/^ //' |sed 's/ /#/' | sed 's/-/#/'`
       do	    
