@@ -203,5 +203,6 @@ do
     echo $hod#$line | awk -F# 'BEGIN{OFS="#";} {print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15}' >> ${BPIN_DIR}/final_brno.csv
 done
 
+zip ${BPIN_DIR}/gemini_brno.zip ${BPIN_DIR}/*pindel.txt
 
 log "New pindel end"
