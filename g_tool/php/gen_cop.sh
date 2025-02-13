@@ -5,7 +5,8 @@ cd $1
 echo "use $RUN;" > ./get_tab.sql
 echo "show tables;" >> ./get_tab.sql
 
-mysql -u web -p"modry_prizrak" < ./get_tab.sql | grep -v pok | grep -v dw | grep -v Table | grep -v neza | grep -v konfir | grep -v _fi | grep -v CLNSIGCONF | grep -v _MSH2 | grep -v _pin > ./rsez.txt
+mysql -u web -p"modry_prizrak" < ./get_tab.sql | grep -v pok | grep -v dw | grep -v Table | grep -v neza | grep -v konfir | grep -v _fi | grep -v CLNSIGCONF | grep -v _MSH2 | grep -v _pin | grep -v cnv > ./rsez.txt
+
 mkdir ./OUT
 for pac in `cat ./rsez.txt`
   do
