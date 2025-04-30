@@ -49,7 +49,7 @@ for file in `ls ${RECALIBRATED_DIR}/*.recal.rmdup.bam.bai`
     bf=`basename -s .picard.sorted.RG.realigned.recal.rmdup.bam.bai $file`
     ffile=`basename -s .bai $file`
     echo "${RECALIBRATED_DIR}/$ffile " > ${FPIN_DIR}/$bf.nnn.txt
-    sed -i  "s/$/\t153\t$bf/" ${FPIN_DIR}/$bf.nnn.txt
+    sed -i  "s/$/\t300\t$bf/" ${FPIN_DIR}/$bf.nnn.txt
   done
 
   grep -i ERROR ${FLOG}
