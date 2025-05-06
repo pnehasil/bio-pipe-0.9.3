@@ -102,7 +102,7 @@ if($cnt4 > 0) {
  
   $proc = 100*$xalt/$xwt;
 
-  if($proc > 10) {
+  if($proc > 30) {
      echo "<B> Podezreni na mutaci v <a href=\"./igv.php?chr=chr2&start=47641559&pac=$PAC&run=$database\" target=\"blank\"><b>MSH2</b></a> WT>$xwt  alt>$xalt  proc>$proc </B>"; 
   }
   else {
