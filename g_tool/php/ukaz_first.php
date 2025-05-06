@@ -95,20 +95,23 @@ $cnt4 = $res4->num_rows;
 
 if($cnt4 > 0) {
   $row4 = $res4->fetch_assoc();
-  $xmutG = $row4['mutG'] ;
-  $xallG = $row4['allG'] ;
-  $xmutT = $row4['mutT'] ;
-  $xallT = $row4['allT'] ;
+  $xrna = $row4['rna'] ;
+  $xdna = $row4['dna'] ;
+  $xwt = $row4['wt'] ;
+  $xalt = $row4['alt'] ;
  
-  $procG = 100*$xmutG/$xallG;
-  $procT = 100*$xmutT/$xallT;
+  $proc = 100*$xalt/$xwt;
 
-  if(($xmutG > 5) or ($procG > 10))  {
-     echo "<B> Podezreni na mutaci v <a href=\"./igv.php?chr=chr2&start=47641559&pac=$PAC&run=$database\" target=\"blank\"><b>MSH2</b></a> G>$xmutG vsech readu>$xallG  freq>$procG </B>"; }
+  if($proc > 10) {
+     echo "<B> Podezreni na mutaci v <a href=\"./igv.php?chr=chr2&start=47641559&pac=$PAC&run=$database\" target=\"blank\"><b>MSH2</b></a> WT>$xwt  alt>$xalt  proc>$proc </B>"; 
+  }
+  else {
+     echo "<a href=\"./igv.php?chr=chr2&start=47641559&pac=$PAC&run=$database\" target=\"blank\"><b>MSH2</b></a> WT>$xwt  alt>$xalt  proc>$proc </B>"; 
+  }
 
-  if(($xmutT > 5) or ($procT > 10))  {
-     echo "<BR><B> Podezreni na mutaci v <a href=\"./igv.php?chr=chr2&start=47641559&pac=$PAC&run=$database\" target=\"blank\"><b>MSH2</b></a> T>$xmutT vsech readu>$xallT  freq>$procT </B>"; }
-
+}
+else {
+   echo " Analyza RNA bohuzel neprobehla ";
 }
 
 mysqli_close($mysqli4);
