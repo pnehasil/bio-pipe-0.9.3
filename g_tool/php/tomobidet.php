@@ -16,7 +16,8 @@ $xtvar = str_replace('%3B','%3E',$xtvar);
 //echo "<br> argument >>$xtvar<< <br>";
 
 //set POST variables
-$url = 'https://mobidetails.iurc.montp.inserm.fr/MD/api/variant/create';
+//$url = 'https://mobidetails.iurc.montp.inserm.fr/MD/api/variant/create';
+$url = 'https://mobidetails.chu-montpellier.fr/api/variant/create';
 $fields = array(
                         'variant_chgvs' => $xtvar,
                         //'caller' => urlencode("browser"),
