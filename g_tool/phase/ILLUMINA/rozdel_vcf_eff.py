@@ -1,8 +1,5 @@
-import sys
 
-if len(sys.argv) != 3:
-    print("Použití: python rozdel_vcf_eff.py vstup.vcf vystup.vcf")
-    sys.exit(1)
+import sys
 
 input_vcf = sys.argv[1]
 output_vcf = sys.argv[2]
@@ -15,7 +12,6 @@ with open(input_vcf, 'r') as infile, open(output_vcf, 'w') as outfile:
 
         cols = line.strip().split('\t')
 
-        # Rozděl pole INFO na části
         info_fields = cols[7].split(';')
         eff_entries = []
         other_info_fields = []
@@ -26,14 +22,18 @@ with open(input_vcf, 'r') as infile, open(output_vcf, 'w') as outfile:
             else:
                 other_info_fields.append(field)
 
-        # Pokud existuje více EFF anotací, vytvoř jeden řádek na každou
-        if eff_entries:
+        # Zjisti, zda alespoň jedna anotace obsahuje gen CDKN2A
+        contains_cdkn2a = any('CDKN2A' in eff for eff in eff_entries)
+
+        # Pokud existuje více EFF anotací a jedna z nich obsahuje CDKN2A, rozděl řádek
+        if eff_entries and contains_cdkn2a:
             for eff in eff_entries:
-                new_cols = cols.copy()
-                new_info = other_info_fields.copy()
-                new_info.append("EFF=" + eff)
-                new_cols[7] = ';'.join(new_info)
-                outfile.write('\t'.join(new_cols) + '\n')
+                if 'CDKN2A' in eff:
+                    new_cols = cols.copy()
+                    new_info = other_info_fields.copy()
+                    new_info.append("EFF=" + eff)
+                    new_cols[7] = ';'.join(new_info)
+                    outfile.write('\t'.join(new_cols) + '\n')
         else:
             outfile.write(line)
 

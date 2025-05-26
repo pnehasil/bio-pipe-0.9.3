@@ -58,6 +58,11 @@ ADDVKS(OUTDIR,RUN,DBS)
    ; 
    ; 24.06.2024
    ; clinvar_disease_name text(1024) -> text(2048)
+   ; 
+   ; 15.01.2025
+   ; rmsk text(400) -> text(600)
+   ; ref varchar(200) -> text(4000)
+   ; alt varchar(200) -> text(4000)
    ; -----------------------------------------------------------------------------------
    ;
    K ^WTMPU
@@ -245,7 +250,7 @@ CRTABLE(TABLE,RUN,DBS)
    W "      `Czecanca_kons` varchar(30) DEFAULT NULL,",!
    W "      `max_aaf_all` decimal(16,14) DEFAULT NULL,",!
    W "      `aaf_esp_ea` decimal(16,14) DEFAULT NULL,",!
-   W "      `impact_so` varchar(50) DEFAULT NULL,",!
+   W "      `impact_so` varchar(128) DEFAULT NULL,",!
    W "      `VIK_9carrier` varchar(5) DEFAULT NULL,",!
    W "      `VIK_unknown` varchar(5) DEFAULT NULL,",!
    W "      `aaf_esp_all` decimal(16,14) DEFAULT NULL,",!
@@ -267,15 +272,15 @@ CRTABLE(TABLE,RUN,DBS)
    W "      `chrom` varchar(10) DEFAULT NULL,",!
    W "      `start` int(11) DEFAULT NULL,",!
    W "      `end` int(11) DEFAULT NULL,",!
-   W "      `ref` varchar(200) DEFAULT NULL,",!
-   W "      `alt` varchar(200) DEFAULT NULL,",!
+   W "      `ref` text(2000) DEFAULT NULL,",!
+   W "      `alt` text(2000) DEFAULT NULL,",!
    W "      `num_reads_w_dels` varchar(10) DEFAULT NULL,",!
    W "      `allele_count` int(2) DEFAULT NULL,",!
    W "      `allele_bal` varchar(10) DEFAULT NULL,",!
    W "      `rs_ids` varchar(60) DEFAULT NULL,",!
    W "      `in_omim` int(3) DEFAULT NULL,",!
    W "      `clinvar_disease_name` varchar(2047) DEFAULT NULL,",!
-   W "      `rmsk` varchar(400) DEFAULT NULL,",!
+   W "      `rmsk` varchar(600) DEFAULT NULL,",!
    W "      `zwt` int(11) DEFAULT NULL,",!
    W "      `zalt` int(11) DEFAULT NULL,",!
    W "      `priority` int(11) DEFAULT NULL,",!
